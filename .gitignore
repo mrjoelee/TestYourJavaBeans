@@ -1,3 +1,7 @@
+# IntelliJ metadata files
+.idea/
+*.mil
+
 # Compiled class file
 *.class
 
