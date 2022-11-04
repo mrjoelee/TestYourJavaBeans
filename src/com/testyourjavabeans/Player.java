@@ -3,11 +3,12 @@ package com.testyourjavabeans;
 class Player {
     //fields
     private String name;
-    private String level;
+    private Difficulty level = Difficulty.BEGINNER;  //default always starting as beginner
 
     //constructor
-    public  Player(String name){
+    public  Player(String name, Difficulty level){
         setName(name);
+        setLevel(level);
     }
 
     //accessors
@@ -19,11 +20,11 @@ class Player {
         this.name = name;
     }
 
-    public String getLevel() {
+    public Difficulty getLevel() {
         return level;
     }
 
-    public void setLevel(String level) {
+    public void setLevel(Difficulty level) {
         this.level = level;
     }
 }
