@@ -6,7 +6,7 @@ import com.testyourjavabeans.Levels;
 import java.util.Scanner;
 
 
-class TriviaApp {
+public class TriviaApp {
 
     Prompter prompter = new Prompter(new Scanner(System.in));
     private String name;
@@ -22,7 +22,7 @@ class TriviaApp {
     }
 
     public void welcome() {
-        System.out.println("Welcome to the Java Triva App");
+        System.out.println("Welcome to the Java Trivia App");
     }
 
     public String promptForName() {
@@ -34,6 +34,8 @@ class TriviaApp {
         board.show();
 
     }
+
+
 
 
 
