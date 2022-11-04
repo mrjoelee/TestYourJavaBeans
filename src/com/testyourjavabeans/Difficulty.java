@@ -20,7 +20,19 @@ public enum Difficulty {
 
         {
             try {
-                lines = Files.readAllLines((Path.of("questions/questions.csv")));
+                lines = Files.readAllLines((Path.of("questions/easy-questions.csv")));
+                for(String line : lines){
+                    String[] tokens = line.split(",");
+                    Integer number = Integer.valueOf(tokens[0]);
+                    String question = tokens[1];
+                    String answer = tokens[2];
+                    String answer1 = tokens[3];
+                    String answer2 = tokens[4];
+                    String answer3 = tokens[5];
+
+                    //Todo add.
+
+                }
             } catch (IOException e) {
                 e.printStackTrace();
             }
