@@ -9,8 +9,9 @@ import java.util.Map;
 public class Board implements Serializable {
     //fields
     private static final String playerFilePath = "player/board.dat";
+    private static final String playerDataFilePath = "player/playerData.csv";
 
-    private final Map<String, Levels> playerMap = loadPlayerMap();
+    private final Map<String, Difficulty> playerMap = loadPlayerMap();
 
     //business methods
     private Board(){
@@ -62,16 +63,18 @@ public class Board implements Serializable {
      * Map K: (Integer)Answer# V: (String) Answers
      */
 
-    private Map<String, Levels> loadPlayerMap() {
-        Map<String, Levels> playerMap = new HashMap<>();
+
+    //getting the players name and levels to be added to the map.
+    private Map<String, Difficulty> loadPlayerMap() {
+        Map<String, Difficulty> playerMap = new HashMap<>();
 
         try {
-            List<String> playerInfo = Files.readAllLines(Path.of(conf/playerData.csv));
+            List<String> playerInfo = Files.readAllLines(Path.of(playerDataFilePath)); // only names, there is no level
 
             for (String info : playerInfo) {
                 String[] splits = info.split(",");
                 String name = splits[0];
-                Levels level = Levels.valueOf(splits[1]);
+                Difficulty level = Difficulty.valueOf(splits[1]);
                 playerMap.put(name,level);
             }
 
