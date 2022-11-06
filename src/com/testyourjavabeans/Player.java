@@ -1,17 +1,15 @@
 package com.testyourjavabeans;
 
-class Player {
-    //fields
-    private String name;
-    private Difficulty level = Difficulty.BEGINNER;  //default always starting as beginner
+public class Player {
 
-    //constructor
+    private String name;
+    private Difficulty level = Difficulty.BEGINNER;
+
     public  Player(String name, Difficulty level){
         setName(name);
         setLevel(level);
     }
 
-    //accessors
     public String getName() {
         return name;
     }

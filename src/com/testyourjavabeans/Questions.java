@@ -11,15 +11,23 @@ public class Questions {
     }
 
     public  boolean isCorrectAnswer(String answer) {
-        return answer.equals(answerText);
+        return answer.equals((answerText.trim()));
     }
 
     public void setQuestionText(String questionText) {
         this.questionText = questionText;
     }
 
+    public String getAnswerText() {
+        return answerText;
+    }
+
     public void setAnswerText(String answerText) {
         this.answerText = answerText;
     }
 
+    @Override
+    public String toString() {
+        return questionText;
+    }
 }
