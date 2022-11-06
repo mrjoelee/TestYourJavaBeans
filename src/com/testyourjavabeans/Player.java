@@ -1,17 +1,41 @@
 package com.testyourjavabeans;
 
-class Player {
-    //fields
-    private String name;
-    private Difficulty level = Difficulty.BEGINNER;  //default always starting as beginner
+import java.io.IOException;
+import java.io.Serializable;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.List;
 
-    //constructor
+public class Player implements Serializable {
+
+    private String name;
+    private Difficulty level;
+
     public  Player(String name, Difficulty level){
         setName(name);
         setLevel(level);
     }
 
-    //accessors
+    public boolean playerExist(String name){
+        boolean result = false;
+        List<String> lines;
+
+        try {
+            lines = Files.readAllLines(Path.of("player/playerdata.csv"));
+            for(String line : lines){
+                String playerName = line.split(",")[0];
+                if(name.equals(playerName)){
+                    result = true;
+                }
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return result;
+    }
+
     public String getName() {
         return name;
     }
@@ -27,4 +51,5 @@ class Player {
     public void setLevel(Difficulty level) {
         this.level = level;
     }
+
 }
