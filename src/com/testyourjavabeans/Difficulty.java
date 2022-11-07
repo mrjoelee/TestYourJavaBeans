@@ -69,5 +69,6 @@ public enum Difficulty {
         int result = 0;
         return questions.size();
     }
+
     //maybe we need to implement the List and the Files.ReadAlline
 }

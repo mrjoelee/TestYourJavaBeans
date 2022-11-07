@@ -60,7 +60,7 @@ public class Board implements Serializable {
         // currently saves Joe/Beginner
         player = new Player(name, difficulty);
         playerMap1.add(player);
-        save();
+        //save();
     }
 
 
