@@ -121,6 +121,9 @@ public class TriviaApp {
             System.out.println("\nYour answer is wrong!\n");
             setContinueGame("n");
         }
+        System.out.println("Patience Grasshopper"); // make created a fun fact - a feature add.
+        Console.pause(2000);
+        Console.clear();
     }
 
     private void showBoard() {
