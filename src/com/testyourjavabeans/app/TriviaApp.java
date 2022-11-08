@@ -5,17 +5,12 @@ import com.testyourjavabeans.*;
 
 import java.util.Scanner;
 
-/*
- * utilize Player and Difficulty classes to make TriviaApp simple.
- */
-
 public class TriviaApp {
 
-    Difficulty difficulty = Difficulty.BEGINNER;
+    //Difficulty difficulty = Difficulty.BEGINNER;
     Prompter prompter = new Prompter(new Scanner(System.in));
-    //private boolean gameover;
     //private String name;
-    private String continueGame = "y"; //switch this to a boolean (use the top boolean)
+    private boolean continueGame = true;
     Intro intro = new Intro();
     Player player;
     //private final Board board = Board.getInstance();
@@ -42,42 +37,44 @@ public class TriviaApp {
 //    }
 
     //we will have to refactor this session.
-    public void startRoundOfQuestions() { //while (!gameover){} what would make gameover = 3 wrong. or finish the trivia.
-        //while loop(see line 42)
+    public void startRoundOfQuestions() {
         switch (player.getLevel()) {
             case BEGINNER:
                 //difficulty = getDifficulty();
-                //difficulty.createQuestionBank(); when enum difficulty gets calld, the questions are created
-                while (getContinueGame().equals("y") && difficulty.getListSize() > 0) {
+                //difficulty.createQuestionBank();
+                (player.getLevel()).createQuestionBank();
+                while (getContinueGame() && (player.getCorrectAnswerCount() < 5)) {
                     answer();
                 }
 
             case INTERMEDIATE:
-                if (difficulty.getListSize() == 0) {
+                if (getContinueGame()) {
+                    player.setCorrectAnswerCount(0);
                     player.playerLevelUpdate(Difficulty.INTERMEDIATE); // we have 2 player levels difficulty
                     player.setLevel(Difficulty.INTERMEDIATE);
                     System.out.println(player.getName() + " you are now at level: " + player.getLevel() + "\n");
-                    setDifficulty();
+                    //setDifficulty();  // can delete?
                     //difficulty = getDifficulty();
-                    //difficulty.createQuestionBank();
-                    while (getContinueGame().equals("y") && difficulty.getListSize() > 0) {
+                    (player.getLevel()).createQuestionBank();
+                    while (getContinueGame() && player.getCorrectAnswerCount() < 5) {
                         answer();
                     }
 
                 }
 
             case ADVANCED:
-                if (difficulty.getListSize() == 0) {
+                if (getContinueGame()) {
+                    player.setCorrectAnswerCount(0);
                     player.playerLevelUpdate(Difficulty.ADVANCED);
                     player.setLevel(Difficulty.ADVANCED);
                     System.out.println(player.getName() + " you are now at level: " + player.getLevel() + "\n");
-                    setDifficulty();
+                    //setDifficulty(); // can delete?
                     //difficulty = getDifficulty();
-                    //difficulty.createQuestionBank();
-                    while (getContinueGame().equals("y") && difficulty.getListSize() > 0) {
+                    (player.getLevel()).createQuestionBank();
+                    while (getContinueGame() && player.getCorrectAnswerCount() < 5) {
                         answer();
                     }
-                    if (difficulty.getListSize() == 0) {
+                    if (player.getCorrectAnswerCount() == 5) {
                         System.out.println("Congratulations " + player.getName() + " you have won the game.");
                     }
                 }
@@ -150,42 +147,52 @@ public class TriviaApp {
 
     //prompting for name for new player
     private String promptName() {
-        intro.showBanner();
-        String namePattern = "([a-zA-Z]{2,10})";
-        String name = prompter.prompt("Please enter your name:", namePattern,
-                "Invalid Data: Must be between 2-10 Characters (insensitive)\n");
+        String namePattern = "([a-zA-Z ]{2,20})";
+        String name = prompter.prompt("Please enter your first and last name:", namePattern,
+                "Invalid Data: Must be between 2-20 Characters (insensitive)\n");
         System.out.println();
         player = new Player(name, Difficulty.BEGINNER);
+
         //verifying if the player has already played, if so will retrieve the player.
         player.playerExist();
-        //it creates the player
-        setPlayer(player);
-        return name;
 
+        //it creates the player
+       // setPlayer(player);
+        return name;
     }
 
     // method() used by startRoundOfQuestions - this shows the current question, prompts for a response
     // then determines if correct and sets field which determines whether or not to continue (continuesGame)
+    // also gets and sets number of correct and incorrect answers from player class
     private void answer() {
-
-        Questions question = getDifficulty().nextQuestion();
+        int answerCorrectCount = player.getCorrectAnswerCount();
+        int answerIncorrectCount = player.getIncorrectAnswerCount();
+        Questions question = (player.getLevel()).nextQuestion();
         System.out.println(question);
         String answer = promptForAnswer();
         if (question.isCorrectAnswer(answer)) {
+            player.setCorrectAnswerCount(answerCorrectCount += 1); //not sure why saying this, it does get used
             System.out.println("\nGreat\n");
         } else {
             System.out.println("\nYour answer is wrong!\n");
-            setContinueGame("n");
+            player.setIncorrectAnswerCount(answerIncorrectCount += 1); //this does get used
         }
-        Console.pause(2000);
+
+        if (player.shouldPlayerContinue()) {
+            setContinueGame(true);
+        }
+        else {
+            setContinueGame(false);
+        }
+
+        Console.pause(200);
         Console.clear();
-        intro.showBanner();
     }
 
-    private void showBoard() {
-        Console.clear();
-        //board.show();
-    }
+//    private void showBoard() {
+//        Console.clear();
+//        //board.show();
+//    }
 
     // review this code for usage.
     private String promptForAnswer() {
@@ -194,27 +201,27 @@ public class TriviaApp {
     }
 
     //these setters - we will need to work together to move into the according classes.
-    public String getContinueGame() {
+    public boolean getContinueGame() {
         return continueGame;
     }
 
-    public void setContinueGame(String continueGame) {
+    public void setContinueGame(boolean continueGame) {
         this.continueGame = continueGame;
     }
 
-    public Difficulty getDifficulty() {
-        return difficulty;
-    }
-
-    public void setDifficulty() {
-        this.difficulty = player.getLevel();
-    }
-
-    public Player getPlayer() {
-        return player;
-    }
-
-    public void setPlayer(Player player) {
-        this.player = player;
-    }
+//    public Difficulty getDifficulty() {
+//        return difficulty;
+//    }
+//
+//    public void setDifficulty() {
+//        this.difficulty = player.getLevel();
+//    }
+//
+//    public Player getPlayer() {
+//        return player;
+//    }
+//
+//    public void setPlayer(Player player) {
+//        this.player = player;
+//    }
 }

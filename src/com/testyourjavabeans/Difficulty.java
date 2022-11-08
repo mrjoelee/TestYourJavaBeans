@@ -14,7 +14,7 @@ public enum Difficulty {
 
     private final List<Questions> questions = new ArrayList<>();
     String filename;
-    int lineCounter;
+    //int lineCounter;
 
     Difficulty(String filename) {
         this.filename = filename;
@@ -55,10 +55,10 @@ public enum Difficulty {
 
     //public boolean hasQuestion(){}
 
-    public int getListSize() {
-        int result = 0;
-        return questions.size();
-    }
+//    public int getListSize() {
+//        int result = 0;
+//        return questions.size();
+//    }
 
 
 

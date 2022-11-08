@@ -10,24 +10,20 @@ public class Player implements Serializable {
     private String name;
     private Difficulty level;
     private File file = new File("player/playerdata.csv");
-    private boolean returningPlayer;
+    private int incorrectAnswerCount = 0;
+    private int correctAnswerCount = 0;
+    //private boolean returningPlayer; //I think this can be deleted along with and associated uses
     Map<String, Difficulty> playerMap = new TreeMap<>();
-
-    //player can keep count of answer per level(difficulty);
-    //increment amount of answer and if it matches 5 then jumps to the next level.
-    // player can have incorrect and correct, if a player starts a new level, clear their incorrect and correct amount.
-    //e.g, player answer 4 questions, has 2 wrong questions, answer 1 more and advances, do we stay with the wrong amount or
-    // 3 wrong for whole trivia.
 
     public Player(String name, Difficulty level) {
         setName(name);
         setLevel(level);
     }
-    //region methods checking if player exists, saves a new player to the file "playerdata.csv"
+    //methods checking if player exists, saves a new player to the file "playerdata.csv"
     public void playerExist() {
 
         List<String> lines; // what's the purpoe of this list.
-        setReturningPlayer(false);
+        //setReturningPlayer(false); can delete?
         String tempLine = null;
         //create file if doesn't exit
         try {
@@ -36,11 +32,14 @@ public class Player implements Serializable {
             }
 
             lines = Files.readAllLines(Path.of("player/playerdata.csv"));
+            // This eliminates the scenario where the csv file only has one name and the same player returns and gets
+            // counted again and added to the csv file
             if (lines.isEmpty()) {
                 System.out.println("Welcome new player!");
                 addPlayerToFile(name, level);
                 lines.add(name + "," + level);
-            } else {
+            }
+            else {
                 for (String line : lines) {
                     String playerName = line.split(",")[0];
                     Difficulty playerLevel = level.valueOf(line.split(",")[1]);
@@ -69,7 +68,7 @@ public class Player implements Serializable {
             String data = (namePlayer + "," + levelPlayer);
             FileWriter fileWriter = new FileWriter(file, true);
             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
-            bufferedWriter.write(data);
+            bufferedWriter.write(data); // can combine, possible use use new printwriter(filewriter())
             bufferedWriter.newLine();
             bufferedWriter.close(); // we can use try with resources.
             fileWriter.close();     // we can use try with resources.
@@ -78,8 +77,9 @@ public class Player implements Serializable {
         }
     }
 
+    //This method creates a new playerdata.csv file with the updated players level of difficulty
     public void playerLevelUpdate(Difficulty newLevel) {
-        List<String> tempList = null;
+        //List<String> tempList = null;  can delete
         String namePlayer = getName();
         String data = (namePlayer + "," + newLevel);
 
@@ -106,10 +106,17 @@ public class Player implements Serializable {
         }
 
     }
-    //endregion
 
-    public void updateFile(String namePlayer) {
+//    public void updateFile(String namePlayer) {  can delete?
+//
+//    }
 
+    public boolean shouldPlayerContinue() {
+        boolean result = true;
+        if (getIncorrectAnswerCount() ==3) {
+            result = false;
+        }
+        return result;
     }
 
     public String getName() {
@@ -128,12 +135,29 @@ public class Player implements Serializable {
         this.level = level;
     }
 
-    public void setReturningPlayer(boolean returningPlayer) {
-        this.returningPlayer = returningPlayer;
+    public int getIncorrectAnswerCount() {
+        return incorrectAnswerCount;
     }
 
-    public boolean isReturningPlayer() {
-        return returningPlayer;
+    public void setIncorrectAnswerCount(int incorrectAnswerCount) {
+        this.incorrectAnswerCount = incorrectAnswerCount;
     }
+
+    public int getCorrectAnswerCount() {
+        return correctAnswerCount;
+    }
+
+    public void setCorrectAnswerCount(int correctAnswerCount) {
+        this.correctAnswerCount = correctAnswerCount;
+    }
+
+    //    public void setReturningPlayer(boolean returningPlayer) {  can delete?
+//        this.returningPlayer = returningPlayer;
+//    }
+//
+//    public boolean isReturningPlayer() {
+//        return returningPlayer;
+//    }
+
 
 }
