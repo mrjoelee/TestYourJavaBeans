@@ -21,6 +21,7 @@ public enum Difficulty {
         this.filename = filename;
     }
 
+    //loads the questions into each enums by the usage of the constructor "filename"
     public void createQuestionBank() {
         List<String> lines;
 
@@ -60,15 +61,19 @@ public enum Difficulty {
         }
     }
 
+    //shuffle the questions and removes the question once it is asked (answered).
     public Questions nextQuestion() {
         Collections.shuffle(questions);
         return questions.remove(0);
     }
 
+
     public int getListSize() {
         int result = 0;
         return questions.size();
     }
+
+
 
     //maybe we need to implement the List and the Files.ReadAlline
 }
