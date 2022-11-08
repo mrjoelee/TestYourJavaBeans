@@ -1,5 +1,5 @@
 package com.testyourjavabeans.client;
-import com.testyourbeans.app.TriviaApp;
+import com.testyourjavabeans.app.TriviaApp;
 
 
 class Main {

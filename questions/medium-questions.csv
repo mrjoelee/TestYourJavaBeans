@@ -1,3 +1,11 @@
-I,1,What number is number 1?,1         
-T,2,I was born with three thumbs,F  
-M,3,What year was I born?,1984,0001,0002,0003,1984   
+T,1,You can override private or static methods in Java.(T/F),F
+T,2,In an instance method or a constructor "this" is a reference to the current object.(T/F),T
+M,3,According to Jay - What must a good citizen do for unchecked exceptions?.,A:Let it be,B:Suprise!,C:Announce it,D:Ask Jay,C
+T,4,Interfaces can be instantiated.(T/F),F
+M,5,Choose the valid statement:,A:char[] ch = new char(5),B:char[] ch = new char[5],C:char[] ch = new char(),D:char[] ch = new char[],B
+M,6,Where is System class defined?,A:java.lang.package,B:java.util.package,C:java.io.package,D:custom.your.package,A
+M,7,Identify the infinite loop:,A:for(;;),B:for(int i=0; i < 1; i--),C:for(int i = 0; i++),D:All of the above,D
+M,8,This if statement: if("joe".equals(RunTheWire)){} is refer as:,A:Conditional,B:UnConditional,C:Marshall's Way,D:My Way,C
+M,9,Identify the correct way of declaring this constructor: public class Solution{},A:Solution(){},B:public Solution(){},C:Solution(void){},D:Both(A) and (B),D
+
+

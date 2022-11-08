@@ -11,16 +11,16 @@ public class Player implements Serializable {
     private Difficulty level;
     private File file = new File("player/playerdata.csv");
     private boolean returningPlayer;
-
+    Map<String, Difficulty> playerMap = new TreeMap<>();
 
     public Player(String name, Difficulty level) {
         setName(name);
         setLevel(level);
     }
-
+    //region methods checking if player exists, saves a new player to the file "playerdata.csv"
     public void playerExist() {
-        Map<String, Difficulty> playerMap = new TreeMap<>();
-        List<String> lines;
+
+        List<String> lines; // what's the purpoe of this list.
         setReturningPlayer(false);
         String tempLine = null;
         //create file if doesn't exit
@@ -57,7 +57,6 @@ public class Player implements Serializable {
         }
     }
 
-
     // called by playerExist() to add new player to the player csv file
     public void addPlayerToFile(String namePlayer, Difficulty levelPlayer) {
         try {
@@ -66,8 +65,8 @@ public class Player implements Serializable {
             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
             bufferedWriter.write(data);
             bufferedWriter.newLine();
-            bufferedWriter.close();
-            fileWriter.close();
+            bufferedWriter.close(); // we can use try with resources.
+            fileWriter.close();     // we can use try with resources.
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -77,7 +76,6 @@ public class Player implements Serializable {
         List<String> tempList = null;
         String namePlayer = getName();
         String data = (namePlayer + "," + newLevel);
-
 
         try {
             List<String> lines = Files.readAllLines(Path.of("player/playerdata.csv"));
@@ -102,6 +100,7 @@ public class Player implements Serializable {
         }
 
     }
+    //endregion
 
     public void updateFile(String namePlayer) {
 
@@ -130,4 +129,6 @@ public class Player implements Serializable {
     public boolean isReturningPlayer() {
         return returningPlayer;
     }
+
+
 }
