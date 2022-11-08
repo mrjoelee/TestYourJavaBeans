@@ -147,6 +147,7 @@ public class TriviaApp {
 
     //prompting for name for new player
     private String promptName() {
+        intro.showBanner();
         String namePattern = "([a-zA-Z ]{2,20})";
         String name = prompter.prompt("Please enter your first and last name:", namePattern,
                 "Invalid Data: Must be between 2-20 Characters (insensitive)\n");
@@ -185,8 +186,9 @@ public class TriviaApp {
             setContinueGame(false);
         }
 
-        Console.pause(200);
+        Console.pause(1000);
         Console.clear();
+        intro.showBanner();
     }
 
 //    private void showBoard() {
