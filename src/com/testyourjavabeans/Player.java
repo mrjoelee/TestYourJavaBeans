@@ -13,6 +13,12 @@ public class Player implements Serializable {
     private boolean returningPlayer;
     Map<String, Difficulty> playerMap = new TreeMap<>();
 
+    //player can keep count of answer per level(difficulty);
+    //increment amount of answer and if it matches 5 then jumps to the next level.
+    // player can have incorrect and correct, if a player starts a new level, clear their incorrect and correct amount.
+    //e.g, player answer 4 questions, has 2 wrong questions, answer 1 more and advances, do we stay with the wrong amount or
+    // 3 wrong for whole trivia.
+
     public Player(String name, Difficulty level) {
         setName(name);
         setLevel(level);
@@ -129,6 +135,5 @@ public class Player implements Serializable {
     public boolean isReturningPlayer() {
         return returningPlayer;
     }
-
 
 }

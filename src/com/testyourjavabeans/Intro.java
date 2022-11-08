@@ -35,6 +35,9 @@ public class Intro implements Runnable {
         System.out.println(this.images.get(0));
         Console.clear();
     }
+    public void showBanner(){
+        System.out.println(this.images.get(1));
+    }
 
     public void next(){
         this.run();

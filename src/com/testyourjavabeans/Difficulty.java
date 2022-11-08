@@ -16,45 +16,31 @@ public enum Difficulty {
     String filename;
     int lineCounter;
 
-
     Difficulty(String filename) {
         this.filename = filename;
+        createQuestionBank();
     }
 
     //loads the questions into each enums by the usage of the constructor "filename"
-    public void createQuestionBank() {
+    private void createQuestionBank() {
         List<String> lines;
 
         try {
             lines = Files.readAllLines((Path.of("questions/" + filename + "-questions.csv")));
             for (String line : lines) {
+                String[] tokens = line.split(",");
                 String questionType = line.split(",")[0];
-                int numberQuestion;
-
-                switch (questionType) {
-                    case "I":
-                        String[] tokens = line.split(",");
-                        numberQuestion = Integer.parseInt(tokens[1]);
-                        String question = tokens[2];
-                        String answer =  tokens[3];
-                        questions.add(new Questions(question,answer));
-                        break;
-                    case "T":
-                        tokens = line.split(",");
-                        numberQuestion = Integer.parseInt(tokens[1]);
-                        question = tokens[2];
-                        answer =  tokens[3].toLowerCase();
-                        questions.add(new Questions(question,answer));
-                        break;
-                    case "M":
-                        tokens = line.split(",");
-                        numberQuestion = Integer.parseInt(tokens[1]);
-                        question = String.format("%s\n %s\n %s\n %s\n %s\n", tokens[2], tokens[3], tokens[4],
-                                tokens[5], tokens[6]);
-                        answer = tokens[7].toLowerCase();
-                        questions.add(new Questions(question,answer));
-                        break;
+                int numberQuestion = Integer.parseInt(tokens[1]);
+                String question = tokens[2];
+                String answer =  tokens[3];
+                if("M".equals(questionType)){
+                    question = String.format("%s\n %s\n %s\n %s\n %s\n", tokens[2], tokens[3], tokens[4],
+                            tokens[5], tokens[6]);
+                    answer = tokens[7].toLowerCase();
+                } else if ("T".equals(questionType)){
+                    answer = tokens[3].toLowerCase();
                 }
+                questions.add(new Questions(question,answer));
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -62,11 +48,12 @@ public enum Difficulty {
     }
 
     //shuffle the questions and removes the question once it is asked (answered).
-    public Questions nextQuestion() {
+    public Questions nextQuestion() { //refactor the name to singular
         Collections.shuffle(questions);
         return questions.remove(0);
     }
 
+    //public boolean hasQuestion(){}
 
     public int getListSize() {
         int result = 0;

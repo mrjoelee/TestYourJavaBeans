@@ -7,5 +7,3 @@ M,6,Where is System class defined?,A:java.lang.package,B:java.util.package,C:jav
 M,7,Identify the infinite loop:,A:for(;;),B:for(int i=0; i < 1; i--),C:for(int i = 0; i++),D:All of the above,D
 M,8,This if statement: if("joe".equals(RunTheWire)){} is refer as:,A:Conditional,B:UnConditional,C:Marshall's Way,D:My Way,C
 M,9,Identify the correct way of declaring this constructor: public class Solution{},A:Solution(){},B:public Solution(){},C:Solution(void){},D:Both(A) and (B),D
-
-
