@@ -2,6 +2,7 @@ package com.testyourjavabeans.app;
 
 import com.apps.util.*;
 import com.testyourjavabeans.*;
+import com.testyourjavabeans.Player;
 
 import java.util.Scanner;
 
