@@ -42,7 +42,7 @@ public class TriviaApp {
             case BEGINNER:
                 //difficulty = getDifficulty();
                 //difficulty.createQuestionBank();
-                (player.getLevel()).createQuestionBank();
+                //(player.getLevel()).createQuestionBank();
                 while (getContinueGame() && (player.getCorrectAnswerCount() < 5)) {
                     answer();
                 }
@@ -55,7 +55,7 @@ public class TriviaApp {
                     System.out.println(player.getName() + " you are now at level: " + player.getLevel() + "\n");
                     //setDifficulty();  // can delete?
                     //difficulty = getDifficulty();
-                    (player.getLevel()).createQuestionBank();
+                    //(player.getLevel()).createQuestionBank();
                     while (getContinueGame() && player.getCorrectAnswerCount() < 5) {
                         answer();
                     }
@@ -70,7 +70,7 @@ public class TriviaApp {
                     System.out.println(player.getName() + " you are now at level: " + player.getLevel() + "\n");
                     //setDifficulty(); // can delete?
                     //difficulty = getDifficulty();
-                    (player.getLevel()).createQuestionBank();
+                    //(player.getLevel()).createQuestionBank();
                     while (getContinueGame() && player.getCorrectAnswerCount() < 5) {
                         answer();
                     }
