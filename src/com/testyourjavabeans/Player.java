@@ -1,7 +1,7 @@
 package com.testyourjavabeans;
 
 import java.io.*;
-
+// blah
 public class Player implements Serializable {
 
     private String name;
