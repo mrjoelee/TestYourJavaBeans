@@ -16,7 +16,7 @@ public class TriviaApp {
     //private String name;
     private String continueGame = "y";
     Player player;
-    private final Board board = Board.getInstance();
+    //private final Board board = Board.getInstance();
     //private Difficulty level; Might not need here
 
     public void execute() {
@@ -24,49 +24,92 @@ public class TriviaApp {
         //showBoard();  //Not sure we need this right here
         //String name = promptForName();
         String name = promptName();
-        updateBoard(name, difficulty);
+        //updateBoard(name, difficulty);
         startRoundOfQuestions();
     }
 
-    private void updateBoard(String name, Difficulty difficulty) {
-        board.update(name, difficulty);
-    }
+//    private void updateBoard(String name, Difficulty difficulty) {
+//        board.update(name, difficulty);
+//    }
 
     public void startRoundOfQuestions() {
+        switch (player.getLevel()) {
+            case BEGINNER:
+                difficulty = getDifficulty();
+                difficulty.createQuestionBank();
+                while (getContinueGame().equals("y") && difficulty.getListSize() > 0) {
+                    askQuestions();
+                }
 
-        //starts the initial round of questions
-        difficulty = getDifficulty();
-        difficulty.createQuestionBank();
-        while (getContinueGame().equals("y") && difficulty.getListSize() > 0) {
-            askQuestions();
-        }
+            case INTERMEDIATE:
+                if (difficulty.getListSize() == 0) {
+                    player.playerLevelUpdate(Difficulty.INTERMEDIATE);
+                    player.setLevel(Difficulty.INTERMEDIATE);
+                    System.out.println(player.getName() + " you are now at level: " + player.getLevel() + "\n");
+                    setDifficulty();
+                    difficulty = getDifficulty();
+                    difficulty.createQuestionBank();
+                    while (getContinueGame().equals("y") && difficulty.getListSize() > 0) {
+                        askQuestions();
+                    }
 
-        //Player moves on to intermediate questions if questions for round 1 used up successfully
-        if (difficulty.getListSize() == 0) {
-            player.setLevel(Difficulty.INTERMEDIATE);
-            System.out.println("Congratulations " + player.getName() + " you have graduated to level: " + player.getLevel() + "\n");
-            setDifficulty();
-            difficulty = getDifficulty();
-            difficulty.createQuestionBank();
-            while (getContinueGame().equals("y") && difficulty.getListSize() > 0) {
-                askQuestions();
-            }
+                }
+                Console.clear();
 
-        }
-        Console.clear();
-        //Player moves on to advanced questions if questions for round 2 used up successfully
-        if (difficulty.getListSize() == 0) {
-            player.setLevel(Difficulty.ADVANCED);
-            System.out.println("Congratulations " + player.getName() + " you have graduated to level: " + player.getLevel() + "\n");
-            setDifficulty();
-            difficulty = getDifficulty();
-            difficulty.createQuestionBank();
-            while (getContinueGame().equals("y") && difficulty.getListSize() > 0) {
-                askQuestions();
-            }
-            System.out.println("Congratulations " + player.getName() + " you have won the game.");
+            case ADVANCED:
+                if (difficulty.getListSize() == 0) {
+                    player.playerLevelUpdate(Difficulty.ADVANCED);
+                    player.setLevel(Difficulty.ADVANCED);
+                    System.out.println(player.getName() + " you are now at level: " + player.getLevel() + "\n");
+                    setDifficulty();
+                    difficulty = getDifficulty();
+                    difficulty.createQuestionBank();
+                    while (getContinueGame().equals("y") && difficulty.getListSize() > 0) {
+                        askQuestions();
+                    }
+                    if (difficulty.getListSize() == 0) {
+                        System.out.println("Congratulations " + player.getName() + " you have won the game.");
+                    }
+                }
         }
     }
+
+
+    //starts the initial round of questions
+//        difficulty = getDifficulty();
+//        difficulty.createQuestionBank();
+//        while (getContinueGame().equals("y") && difficulty.getListSize() > 0) {
+//            askQuestions();
+//        }
+//
+//        //Player moves on to intermediate questions if questions for round 1 used up successfully
+//        if (difficulty.getListSize() == 0) {
+//            player.playerLevelUpdate(Difficulty.INTERMEDIATE);
+//            player.setLevel(Difficulty.INTERMEDIATE);
+//            System.out.println("Congratulations " + player.getName() + " you have graduated to level: " + player.getLevel() + "\n");
+//            setDifficulty();
+//            difficulty = getDifficulty();
+//            difficulty.createQuestionBank();
+//            while (getContinueGame().equals("y") && difficulty.getListSize() > 0) {
+//                askQuestions();
+//            }
+//
+//        }
+//        Console.clear();
+//        //Player moves on to advanced questions if questions for round 2 used up successfully
+//        if (difficulty.getListSize() == 0) {
+//            player.playerLevelUpdate(Difficulty.ADVANCED);
+//            player.setLevel(Difficulty.ADVANCED);
+//            System.out.println("Congratulations " + player.getName() + " you have graduated to level: " + player.getLevel() + "\n");
+//            setDifficulty();
+//            difficulty = getDifficulty();
+//            difficulty.createQuestionBank();
+//            while (getContinueGame().equals("y") && difficulty.getListSize() > 0) {
+//                askQuestions();
+//            }
+//            System.out.println("Congratulations " + player.getName() + " you have won the game.");
+//        }
+//    }
 
 //    public void welcome() {
 //        System.out.println("Welcome to the Java Trivia App");
@@ -99,6 +142,7 @@ public class TriviaApp {
         name = prompter.prompt("Please enter your name:");  // change "answer" to name
         System.out.println();
         player = new Player(name, Difficulty.BEGINNER);
+        player.playerExist();
         // if a statement = if player exist (method), pass in the name, and calls the method under Player class,
         // player method will check the csv file, if it 's true it will return that player.
         //if not it will setPlayer as new player.
