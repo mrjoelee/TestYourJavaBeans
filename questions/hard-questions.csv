@@ -4,5 +4,5 @@ T,3,Java Beans are extremely secured?(T/F),F
 M,4,Which of the following is a valid long literal?,A:ABH8097,B:L990023,C:904423,D:0xnf029L,D
 M,5,What does the expression float a = 35 / 0 return?,A:0,B:Not a Number,C:Infinity,D:Run time exception,C
 M,6,In which memory would a String be stored when we create a string using new operator?,A:Stack,B:String Memory,C:Heap Memory,D:Random Storage Space,C
-M,7,How do you force garbage collection to occur at a certain point?,A:Call System.forceGc(),B:Call System.gc(),C:Call System.requireGc(),D: None of the above,D
+M,7,How do you force garbage collection to occur at a certain point?,A:Call System.forceGc(),B:Call System.gc(),C:Call System.requireGc(),D:None of the above,D
 M,8,What will happen if static modifier is removed from the signature of the main method?,A:CompilationError,B:RunTime Error: NoSuchMethodError,C:Program will compile and run without any input.,D:Program will compile and run to show the required output.,B
