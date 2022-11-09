@@ -2,15 +2,12 @@ package com.testyourjavabeans;
 
 import java.io.*;
 
-public class Player implements Serializable { //need to implement serializable?
+public class Player implements Serializable {
 
     private String name;
     private Difficulty level;
     private int incorrectAnswerCount = 0;
     private int correctAnswerCount = 0;
-//    private File file = new File("player/playerdata.csv");
-//    private boolean returningPlayer;
-
 
     public Player(String name, Difficulty level) {
         setName(name);
@@ -52,19 +49,10 @@ public class Player implements Serializable { //need to implement serializable?
 
     public boolean shouldPlayerContinue() {
         boolean result = true;
-        if (getIncorrectAnswerCount() ==3) {
+        if (getIncorrectAnswerCount() == 3) {
             result = false;
-            System.out.println("You have made three incorrect guesses. Perhaps you should take a break and try again later.");
+            System.out.println("Oh no! You have made three incorrect guesses. Perhaps pause for a quick review and try again later!");
         }
         return result;
     }
-
-
-//    public boolean isReturningPlayer() {
-//        return returningPlayer;
-//    }
-//
-//    public void setReturningPlayer(boolean returningPlayer) {
-//        this.returningPlayer = returningPlayer;
-//    }
 }

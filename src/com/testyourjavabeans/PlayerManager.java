@@ -19,14 +19,12 @@ public class PlayerManager {
     private String name;
     private Difficulty level = Difficulty.BEGINNER;
     private boolean returningPlayer;
-    //Map<String, Difficulty> playerMap = new TreeMap<>();
     Player player;
 
     public PlayerManager(String playerDataFilePath) {
         this.playerDataFilePath = Path.of(playerDataFilePath);
     }
 
-    //this list is not doing anything.
     public List<Player> upload() throws IOException {
         List<Player> completeList = new ArrayList<>();
 
@@ -51,8 +49,6 @@ public class PlayerManager {
     }
 
     public void playerLevelUpdate(Difficulty level, Player newPlayer) {
-//        List<String> tempList = null;
-//        String namePlayer = name;
         String data = (newPlayer.getName() + "," + level);
 
         try {
@@ -63,8 +59,7 @@ public class PlayerManager {
                 if (line.equals(newPlayer.getName() + "," + newPlayer.getLevel().toString())) {
                     bufferedWriter.write(data);
                     bufferedWriter.newLine();
-                }
-                else {
+                } else {
                     String tempLine = line;
                     bufferedWriter.write(tempLine);
                     bufferedWriter.newLine();
@@ -84,7 +79,7 @@ public class PlayerManager {
 //        setReturningPlayer(false);
         String tempLine = null;
         Map<String, Difficulty> playerMap = new TreeMap<>();
-        //create file if doesn't exit
+        //create file if file doesn't exit
         try {
             if (!file.exists()) {
                 file.createNewFile();
@@ -127,8 +122,8 @@ public class PlayerManager {
             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
             bufferedWriter.write(data);
             bufferedWriter.newLine();
-            bufferedWriter.close(); // we can use try with resources.
-            fileWriter.close();     // we can use try with resources.
+            bufferedWriter.close();
+            fileWriter.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
