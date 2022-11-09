@@ -1,8 +1,6 @@
 package com.testyourjavabeans;
 
-import java.io.*;
-
-public class Player implements Serializable {
+public class Player {
 
     private String name;
     private Difficulty level;
@@ -14,6 +12,15 @@ public class Player implements Serializable {
         setLevel(level);
     }
 
+    public boolean shouldPlayerContinue() {
+        boolean result = true;
+        if (getIncorrectAnswerCount() == 3) {
+            result = false;
+            System.out.println("Oh no! You have made three incorrect guesses. " +
+                    "Perhaps pause for a quick review and try again later!");
+        }
+        return result;
+    }
 
     public String getName() {
         return name;
@@ -47,12 +54,4 @@ public class Player implements Serializable {
         this.correctAnswerCount = correctAnswerCount;
     }
 
-    public boolean shouldPlayerContinue() {
-        boolean result = true;
-        if (getIncorrectAnswerCount() == 3) {
-            result = false;
-            System.out.println("Oh no! You have made three incorrect guesses. Perhaps pause for a quick review and try again later!");
-        }
-        return result;
-    }
 }

@@ -1,11 +1,11 @@
 package com.testyourjavabeans;
 
-public class Questions {
+public class Question {
 
     private String questionText;
     private String answerText;
 
-    public Questions(String questionText, String answerText) {
+    public Question(String questionText, String answerText) {
         setAnswerText(answerText);
         setQuestionText(questionText);
     }
@@ -16,10 +16,6 @@ public class Questions {
 
     public void setQuestionText(String questionText) {
         this.questionText = questionText;
-    }
-
-    public String getAnswerText() {
-        return answerText;
     }
 
     public void setAnswerText(String answerText) {
