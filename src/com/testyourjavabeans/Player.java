@@ -6,6 +6,8 @@ public class Player implements Serializable {
 
     private String name;
     private Difficulty level;
+    private int incorrectAnswerCount = 0;
+    private int correctAnswerCount = 0;
 //    private File file = new File("player/playerdata.csv");
 //    private boolean returningPlayer;
 
@@ -31,6 +33,31 @@ public class Player implements Serializable {
     public void setLevel(Difficulty level) {
         this.level = level;
     }
+
+    public int getIncorrectAnswerCount() {
+        return incorrectAnswerCount;
+    }
+
+    public void setIncorrectAnswerCount(int incorrectAnswerCount) {
+        this.incorrectAnswerCount = incorrectAnswerCount;
+    }
+
+    public int getCorrectAnswerCount() {
+        return correctAnswerCount;
+    }
+
+    public void setCorrectAnswerCount(int correctAnswerCount) {
+        this.correctAnswerCount = correctAnswerCount;
+    }
+
+    public boolean shouldPlayerContinue() {
+        boolean result = true;
+        if (getIncorrectAnswerCount() ==3) {
+            result = false;
+        }
+        return result;
+    }
+
 
 //    public boolean isReturningPlayer() {
 //        return returningPlayer;
