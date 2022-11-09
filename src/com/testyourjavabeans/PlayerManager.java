@@ -92,7 +92,8 @@ public class PlayerManager {
 
             List<String> lines = Files.readAllLines(Path.of("player/playerdata.csv"));
             if (lines.isEmpty()) {
-                System.out.println("Welcome new player!");
+                System.out.println("Welcome New Player!");
+                System.out.println();
                 addPlayerToFile(player.getName(), player.getLevel());
                 lines.add(name + "," + level.toString());
             } else {
@@ -102,10 +103,10 @@ public class PlayerManager {
                     playerMap.put(playerName, newLevel);
                 }
                 if (playerMap.containsKey(player.getName())) {
-                    System.out.println("Welcome back player: " + player.getName() + " your level is: " + playerMap.get(player.getName()));
+                    System.out.println("Welcome: " + player.getName() + " Back to Level: " + playerMap.get(player.getName()));
                     player.setLevel(playerMap.get(player.getName()));
                 } else {
-                    System.out.println("Welcome new player");
+                    System.out.println("Welcome New Player");
                     addPlayerToFile(player.getName(), player.getLevel());
                     tempLine = (player.getName() + "," + player.getLevel());
                 }

@@ -195,7 +195,7 @@ public class TriviaApp {
         String message = String.format("Directions: If you get 5 correct answers, you will level up! Get 3 wrong and you are out!\n");
         for(char c : message.toCharArray()){
             System.out.print(c);
-            Console.pause(200);
+            Console.pause(100);
         }
     }
 

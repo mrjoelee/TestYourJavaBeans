@@ -6,7 +6,7 @@ _______  ______  ______  _______ .__    _   ______   _    _   ______  .      _  
   |_|   |_|____  ____|_/   |_|     ____|_| \_|__|_/ \_|__|_| |_|  \_\  |_|__|_| |_|  |_|  \_\_/_/  |_|  |_|  |_|__|_/ |_|____ |_|  |_| |_|  |_|  ____|_/
 
 
- Developed - Nick Houghton | Sarina Lyons | Joe Lee
+ Developed by - Nick Houghton | Sarina Lyons | Joe Lee
 
  (c) 2022 - CaffeineOverFlow
 
