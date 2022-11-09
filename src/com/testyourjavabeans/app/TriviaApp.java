@@ -13,6 +13,7 @@ public class TriviaApp {
     private boolean continueGame = true;
     Intro intro = new Intro();
     Player player;
+    PlayerManager manager = new PlayerManager("player/playerdata.csv");
     //private final Board board = Board.getInstance();
     //private Difficulty level; Might not need here
 
@@ -50,7 +51,7 @@ public class TriviaApp {
             case INTERMEDIATE:
                 if (getContinueGame()) {
                     player.setCorrectAnswerCount(0);
-                    player.playerLevelUpdate(Difficulty.INTERMEDIATE); // we have 2 player levels difficulty
+                    manager.playerLevelUpdate(Difficulty.INTERMEDIATE); // we have 2 player levels difficulty
                     player.setLevel(Difficulty.INTERMEDIATE);
                     System.out.println(player.getName() + " you are now at level: " + player.getLevel() + "\n");
                     //setDifficulty();  // can delete?
@@ -65,7 +66,7 @@ public class TriviaApp {
             case ADVANCED:
                 if (getContinueGame()) {
                     player.setCorrectAnswerCount(0);
-                    player.playerLevelUpdate(Difficulty.ADVANCED);
+                    manager.playerLevelUpdate(Difficulty.ADVANCED);
                     player.setLevel(Difficulty.ADVANCED);
                     System.out.println(player.getName() + " you are now at level: " + player.getLevel() + "\n");
                     //setDifficulty(); // can delete?
@@ -153,9 +154,9 @@ public class TriviaApp {
                 "Invalid Data: Must be between 2-20 Characters (insensitive)\n");
         System.out.println();
         player = new Player(name, Difficulty.BEGINNER);
-
+        System.out.println(player);
         //verifying if the player has already played, if so will retrieve the player.
-        player.playerExist();
+        manager.playerExist(player);
 
         //it creates the player
        // setPlayer(player);
