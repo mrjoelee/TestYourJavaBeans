@@ -98,7 +98,7 @@ public class PlayerManager {
                     playerMap.put(playerName, newLevel);
                 }
                 if (playerMap.containsKey(player.getName())) {
-                    System.out.println("Welcome: " + player.getName() + " Back to Level: " + playerMap.get(player.getName()));
+                    System.out.println("Welcome back: " + player.getName());
                     player.setLevel(playerMap.get(player.getName()));
                 } else {
                     System.out.println("Welcome New Player");
