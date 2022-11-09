@@ -7,23 +7,15 @@ import java.util.Scanner;
 
 public class TriviaApp {
 
-    //Difficulty difficulty = Difficulty.BEGINNER;
     Prompter prompter = new Prompter(new Scanner(System.in));
-    //private String name;
     private boolean continueGame = true;
     Intro intro = new Intro();
     Player player;
     PlayerManager manager = new PlayerManager("player/playerdata.csv");
-    //private final Board board = Board.getInstance();
-    //private Difficulty level; Might not need here
 
     public void execute() {
         introSequenceShow();
-        //welcome();
-        //showBoard();  //Not sure we need this right here
-        //String name = promptForName();
         String name = promptName();
-        //updateBoard(name, difficulty);
         startRoundOfQuestions();
     }
 
@@ -37,6 +29,7 @@ public class TriviaApp {
     public void startRoundOfQuestions() {
         switch (player.getLevel()) {
             case BEGINNER:
+                System.out.println("You are at beginnner level.");
                 while (getContinueGame() && (player.getCorrectAnswerCount() < 5)) {
                     answer();
                 }

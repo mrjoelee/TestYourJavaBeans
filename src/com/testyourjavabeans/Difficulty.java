@@ -29,7 +29,7 @@ public enum Difficulty {
             for (String line : lines) {
                 String[] tokens = line.split(",");
                 String questionType = line.split(",")[0];
-                int numberQuestion = Integer.parseInt(tokens[1]);
+                //int numberQuestion = Integer.parseInt(tokens[1]);
                 String question = tokens[2];
                 String answer = tokens[3];
                 if ("M".equals(questionType)) {
