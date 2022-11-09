@@ -26,6 +26,7 @@ public class PlayerManager {
         this.playerDataFilePath = Path.of(playerDataFilePath);
     }
 
+    //this list is not doing anything.
     public List<Player> upload() throws IOException {
         List<Player> completeList = new ArrayList<>();
 
@@ -97,8 +98,6 @@ public class PlayerManager {
             } else {
                 for (String line : lines) {
                     String playerName = line.split(",")[0];
-                    System.out.println(playerName);
-                    System.out.println(line);
                     Difficulty newLevel = Difficulty.valueOf(line.split(",")[1]);
                     playerMap.put(playerName, newLevel);
                 }

@@ -11,7 +11,7 @@ import java.util.List;
 
 public class Intro implements Runnable {
 
-    private static final String introImages = "data/image-N.txt";
+    private static final String introImages = "images/image-N.txt";
     List<String> images = this.loadImages();
 
     //loads the images from the filepath.
