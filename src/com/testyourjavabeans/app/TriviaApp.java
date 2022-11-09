@@ -76,7 +76,7 @@ public class TriviaApp {
                         answer();
                     }
                     if (player.getCorrectAnswerCount() == 5) {
-                        System.out.println("Congratulations " + player.getName() + " you have won the game.");
+                        System.out.println("Congratulations " + player.getName() + " you have won the game!");
                     }
                 }
         }
@@ -192,7 +192,7 @@ public class TriviaApp {
         intro.showBanner();
     }
     private void directions(){
-        String message = String.format("Directions: 5 correct answers, you will level up but 3 wrong questions, you are out!\n");
+        String message = String.format("Directions: If you get 5 correct answers, you will level up! Get 3 wrong and you are out!\n");
         for(char c : message.toCharArray()){
             System.out.print(c);
             Console.pause(200);
