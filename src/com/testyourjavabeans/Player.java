@@ -1,5 +1,7 @@
 package com.testyourjavabeans;
 
+import com.apps.util.Console;
+
 public class Player {
 
     private String name;
@@ -18,6 +20,7 @@ public class Player {
             result = false;
             System.out.println("Oh no! You have made three incorrect guesses. " +
                     "Perhaps pause for a quick review and try again later!");
+            Console.pause(2000);
         }
         return result;
     }
