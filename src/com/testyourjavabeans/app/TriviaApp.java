@@ -3,19 +3,20 @@ package com.testyourjavabeans.app;
 import com.apps.util.*;
 import com.testyourjavabeans.*;
 
+import java.util.Locale;
 import java.util.Scanner;
 
 public class TriviaApp {
 
-    Prompter prompter = new Prompter(new Scanner(System.in));
+    private Prompter prompter = new Prompter(new Scanner(System.in));
     private boolean continueGame = true;
-    Intro intro = new Intro();
-    Player player;
-    PlayerManager manager = new PlayerManager("player/playerdata.csv");
+    private Intro intro = new Intro();
+    private Player player;
+    private PlayerManager manager = new PlayerManager("player/playerdata.csv");
 
     public void execute() {
         introSequenceShow();
-        String name = promptName();
+        promptName();
         startRoundOfQuestions();
     }
 
@@ -26,7 +27,7 @@ public class TriviaApp {
     }
 
     //we will have to refactor this session.
-    public void startRoundOfQuestions() {
+    private void startRoundOfQuestions() {
         switch (player.getLevel()) {
             case BEGINNER:
                 System.out.println("You are at beginnner level.");
@@ -67,7 +68,7 @@ public class TriviaApp {
         directions();
         String namePattern = "([a-zA-Z ]{2,20})";
         String name = prompter.prompt("Please enter your first and last name:", namePattern,
-                "Invalid Data: Must be between 2-20 Characters (insensitive)\n");
+                "Invalid Data: Must be between 2-20 Characters (insensitive)\n").toLowerCase();
         System.out.println();
         player = new Player(name, Difficulty.BEGINNER);
         manager.playerExist(player);
@@ -99,7 +100,7 @@ public class TriviaApp {
             setContinueGame(false);
         }
 
-        Console.pause(1000);
+        Console.pause(100);
         Console.clear();
         intro.showBanner();
     }
@@ -108,7 +109,7 @@ public class TriviaApp {
         String message = String.format("Directions: If you get 5 correct answers, you will level up! Get 3 wrong and you are out!\n");
         for (char c : message.toCharArray()) {
             System.out.print(c);
-            Console.pause(100);
+            Console.pause(50);
         }
     }
 
@@ -117,11 +118,11 @@ public class TriviaApp {
         return answer;
     }
 
-    public boolean getContinueGame() {
+    private boolean getContinueGame() {
         return continueGame;
     }
 
-    public void setContinueGame(boolean continueGame) {
+    private void setContinueGame(boolean continueGame) {
         this.continueGame = continueGame;
     }
 }
