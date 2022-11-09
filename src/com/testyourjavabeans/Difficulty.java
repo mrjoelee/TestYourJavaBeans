@@ -14,7 +14,6 @@ public enum Difficulty {
 
     private final List<Questions> questions = new ArrayList<>();
     String filename;
-    //int lineCounter;
 
     Difficulty(String filename) {
         this.filename = filename;
@@ -32,35 +31,23 @@ public enum Difficulty {
                 String questionType = line.split(",")[0];
                 int numberQuestion = Integer.parseInt(tokens[1]);
                 String question = tokens[2];
-                String answer =  tokens[3];
-                if("M".equals(questionType)){
-                    question = String.format("%s\n %s\n %s\n %s\n %s\n", tokens[2], tokens[3], tokens[4],
-                            tokens[5], tokens[6]);
+                String answer = tokens[3];
+                if ("M".equals(questionType)) {
+                    question = String.format("%s\n %s\n %s\n %s\n %s\n", tokens[2], tokens[3], tokens[4], tokens[5], tokens[6]);
                     answer = tokens[7].toLowerCase();
-                } else if ("T".equals(questionType)){
+                } else if ("T".equals(questionType)) {
                     answer = tokens[3].toLowerCase();
                 }
-                questions.add(new Questions(question,answer));
+                questions.add(new Questions(question, answer));
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    //shuffle the questions and removes the question once it is asked (answered).
+    //shuffle the questions and remove the question once it is asked (answered).
     public Questions nextQuestion() { //refactor the name to singular
         Collections.shuffle(questions);
         return questions.remove(0);
     }
-
-    //public boolean hasQuestion(){}
-
-//    public int getListSize() {
-//        int result = 0;
-//        return questions.size();
-//    }
-
-
-
-    //maybe we need to implement the List and the Files.ReadAlline
 }

@@ -19,8 +19,8 @@ public class Intro implements Runnable {
         ArrayList<String> images = new ArrayList<>();
 
         try {
-            for(int i=0; i<=1; ++i){
-                String imageFile = introImages.replace('N',String.valueOf(i).charAt(0));
+            for (int i = 0; i <= 1; ++i) {
+                String imageFile = introImages.replace('N', String.valueOf(i).charAt(0));
                 images.add(Files.readString(Path.of(imageFile)));
             }
 
@@ -30,20 +30,21 @@ public class Intro implements Runnable {
         return images;
     }
 
-    //shows each images according to the 'N' of the image folder size.
-    public void show(){
+    //shows each image according to the 'N' of the image folder size.
+    public void show() {
         System.out.println(this.images.get(0));
         Console.clear();
     }
-    public void showBanner(){
+
+    public void showBanner() {
         System.out.println(this.images.get(1));
     }
 
-    public void next(){
+    public void next() {
         this.run();
     }
 
-    public Intro(){
+    public Intro() {
     }
 
     @Override
@@ -52,19 +53,18 @@ public class Intro implements Runnable {
 
         Iterator var1 = this.images.iterator();
 
-        while(var1.hasNext()){
-            String image = (String)var1.next();
+        while (var1.hasNext()) {
+            String image = (String) var1.next();
             System.out.println(image);
             pause();
             Console.clear();
         }
     }
 
-    private static void pause(){
-        try{
+    private static void pause() {
+        try {
             Thread.sleep(3000L);
-        }
-        catch(InterruptedException var1){
+        } catch (InterruptedException var1) {
         }
     }
 }

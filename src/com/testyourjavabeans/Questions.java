@@ -10,7 +10,7 @@ public class Questions {
         setQuestionText(questionText);
     }
 
-    public  boolean isCorrectAnswer(String answer) {
+    public boolean isCorrectAnswer(String answer) {
         return answer.toLowerCase().equals((answerText.trim()));
     }
 

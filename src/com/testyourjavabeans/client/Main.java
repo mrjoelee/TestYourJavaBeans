@@ -1,4 +1,5 @@
 package com.testyourjavabeans.client;
+
 import com.testyourjavabeans.app.TriviaApp;
 
 
