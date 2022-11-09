@@ -1,9 +1,10 @@
-I,1,How many superclasses can a class have?(1 Answer),1
+I,1,How many superclasses can a class have?(please enter a number),1
 T,2,An interface can have at most one default method.(T/F),F
 M,3,What year did Java debut?,A:1992,B:2012,C:1995,D:2000,A
-I,1,How many superclasses can a class have?(1 Answer),1
-T,2,An interface can have at most one default method.(T/F),F
-M,3,What year did Java debut?,A:1992,B:2012,C:1995,D:2000,A
-I,1,How many superclasses can a class have?(1 Answer),1
-T,2,An interface can have at most one default method.(T/F),F
-M,3,What year did Java debut?,A:1992,B:2012,C:1995,D:2000,A
+M,4,What type of relationship is Inheritance?,A:1 to 1,B:IS-A,C:HAS-A,D:Composition,B
+T,5,A superclass constructor is always called?(T/F),T
+T,6,All classes ultimately derive from the root class Object?(T/F),T
+T,7,Abstract classes specify a protocol (contract) that all subclasses must provide?(T/F),T
+M,8,What keyword is used for a class to "sign an interface contract?",A:Override,B:extends,C:implements,D:Default,C
+T,9,An unchecked exception is a subclass of RuntimeException.(T/F),T
+I,10,How many duplicate keys can a Map contain?(please enter a number),0

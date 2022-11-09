@@ -54,6 +54,7 @@ public class Player implements Serializable { //need to implement serializable?
         boolean result = true;
         if (getIncorrectAnswerCount() ==3) {
             result = false;
+            System.out.println("You have made three incorrect guesses. Perhaps you should take a break and try again later.");
         }
         return result;
     }
