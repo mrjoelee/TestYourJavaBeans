@@ -50,6 +50,7 @@ public class TriviaApp {
     //we will have to refactor this session.
     public void startRoundOfQuestions() {
         switch (player.getLevel()) {
+
             case BEGINNER:
                 System.out.println("You are at beginner level.");
                 while (getContinueGame() && (player.getCorrectAnswerCount() < 5)) {
