@@ -5,6 +5,6 @@ T,4,Interfaces can be instantiated.(T/F),F
 M,5,Choose the valid statement:,A:char[] ch = new char(5),B:char[] ch = new char[5],C:char[] ch = new char(),D:char[] ch = new char[],B
 M,6,Where is System class defined?,A:java.lang.package,B:java.util.package,C:java.io.package,D:custom.your.package,A
 M,7,Identify the infinite loop:,A:for(;;),B:for(int i=0; i < 1; i--),C:for(int i= 0; i++),D:All of the above,D
-M,8,This if statement: if("joe".equals(RunTheWire)){} is refer as:,A:Conditional,B:UnConditional,C:Marshall's Way,D:My Way,C
+M,8,The structure of this if statement: if("joe".equals(RunTheWire)){} is referred to as:,A:Conditional,B:UnConditional,C:Marshall's Way,D:My Way,C
 M,9,Identify the correct way of declaring this constructor: public class Solution{},A:Solution(){},B:public Solution(){},C:Solution(void){},D:Both(A) and (B),D
 M,10,Which environment variable is used to set the java path?,A:Maven_Path,B:JavaPath,C:Java,D:Java_Home,D

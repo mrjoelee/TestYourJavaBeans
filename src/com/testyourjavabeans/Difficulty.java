@@ -12,7 +12,7 @@ public enum Difficulty {
     INTERMEDIATE("medium"),
     ADVANCED("hard");
 
-    private final List<Questions> questions = new ArrayList<>();
+    private final List<Question> questions = new ArrayList<>();
     String filename;
 
     Difficulty(String filename) {
@@ -29,7 +29,6 @@ public enum Difficulty {
             for (String line : lines) {
                 String[] tokens = line.split(",");
                 String questionType = line.split(",")[0];
-                //int numberQuestion = Integer.parseInt(tokens[1]);
                 String question = tokens[2];
                 String answer = tokens[3];
                 if ("M".equals(questionType)) {
@@ -38,7 +37,7 @@ public enum Difficulty {
                 } else if ("T".equals(questionType)) {
                     answer = tokens[3].toLowerCase();
                 }
-                questions.add(new Questions(question, answer));
+                questions.add(new Question(question, answer));
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -46,7 +45,7 @@ public enum Difficulty {
     }
 
     //shuffle the questions and remove the question once it is asked (answered).
-    public Questions nextQuestion() { //refactor the name to singular
+    public Question nextQuestion() { //refactor the name to singular
         Collections.shuffle(questions);
         return questions.remove(0);
     }

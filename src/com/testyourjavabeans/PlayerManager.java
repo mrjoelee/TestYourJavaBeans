@@ -13,26 +13,59 @@ import java.util.TreeMap;
 public class PlayerManager {
     private final Path playerDataFilePath;
     private File file = new File("player/playerdata.csv");
-    private String name;
     private Difficulty level = Difficulty.BEGINNER;
-
 
     public PlayerManager(String playerDataFilePath) {
         this.playerDataFilePath = Path.of(playerDataFilePath);
     }
 
-    public List<Player> upload() throws IOException {
-        List<Player> completeList = new ArrayList<>();
+    //methods checking if player exists
+    public void playerExist(Player player) {
+        String name = null;
+        String tempLine = null;
+        Map<String, Difficulty> playerMap = new TreeMap<>();
+        //create file if file doesn't exit
+        try {
+            if (!file.exists()) {
+                file.createNewFile();
+            }
 
-        Files.lines(playerDataFilePath).forEach(line -> {
-            String[] tokens = line.split(",");
+            List<String> lines = Files.readAllLines(Path.of("player/playerdata.csv"));
+            if (lines.isEmpty()) {
+                System.out.println("Welcome New Player!");
+                addPlayerToFile(player.getName(), player.getLevel());
+                lines.add(name + "," + level.toString());
+            } else {
+                for (String line : lines) {
+                    String playerName = line.split(",")[0];
+                    Difficulty newLevel = Difficulty.valueOf(line.split(",")[1]);
+                    playerMap.put(playerName, newLevel);
+                }
+                if (playerMap.containsKey(player.getName())) {
+                    System.out.println("Welcome back: " + player.getName());
+                    player.setLevel(playerMap.get(player.getName()));
+                } else {
+                    System.out.println("Welcome New Player");
+                    addPlayerToFile(player.getName(), player.getLevel());
+                    tempLine = (player.getName() + "," + player.getLevel());
+                }
 
-            String name = tokens[0];
-            Difficulty level = Difficulty.valueOf(tokens[1]);
+            }
+            lines.add(tempLine);
 
-            completeList.add(new Player(name, level));
-        });
-        return completeList;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    //adds a player to the file
+    public void addPlayerToFile(String namePlayer, Difficulty levelPlayer) {
+        try (PrintWriter addPlayer = new PrintWriter(new FileWriter(playerDataFilePath.toFile(), true))){
+            String data = (namePlayer + "," + levelPlayer);
+            addPlayer.println(data);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     //Overrides existing player information. e.g, if "joe was a beginner and advances to intermediate" - updates level.
@@ -62,52 +95,19 @@ public class PlayerManager {
 
     }
 
-    //methods checking if player exists
-    public void playerExist(Player player) {
-        String tempLine = null;
-        Map<String, Difficulty> playerMap = new TreeMap<>();
-        //create file if file doesn't exit
-        try {
-            if (!file.exists()) {
-                file.createNewFile();
-            }
+    //This is set up for testing purposes on the player list.
+    public List<Player> upload() throws IOException {
+        List<Player> completeList = new ArrayList<>();
 
-            List<String> lines = Files.readAllLines(Path.of("player/playerdata.csv"));
-            if (lines.isEmpty()) {
-                System.out.println("Welcome New Player!");
-                addPlayerToFile(player.getName(), player.getLevel());
-                lines.add(name + "," + level.toString());
-            } else {
-                for (String line : lines) {
-                    String playerName = line.split(",")[0];
-                    Difficulty newLevel = Difficulty.valueOf(line.split(",")[1]);
-                    playerMap.put(playerName, newLevel);
-                }
-                if (playerMap.containsKey(player.getName())) {
-                    System.out.println("Welcome: " + player.getName() + " Back to Level: " + playerMap.get(player.getName()));
-                    player.setLevel(playerMap.get(player.getName()));
-                } else {
-                    System.out.println("Welcome New Player");
-                    addPlayerToFile(player.getName(), player.getLevel());
-                    tempLine = (player.getName() + "," + player.getLevel());
-                }
+        Files.lines(playerDataFilePath).forEach(line -> {
+            String[] tokens = line.split(",");
 
-            }
-            lines.add(tempLine);
+            String name = tokens[0];
+            Difficulty level = Difficulty.valueOf(tokens[1]);
 
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    //adds a player to the file
-    public void addPlayerToFile(String namePlayer, Difficulty levelPlayer) {
-        try (PrintWriter addPlayer = new PrintWriter(new FileWriter(playerDataFilePath.toFile(), true))){
-            String data = (namePlayer + "," + levelPlayer);
-            addPlayer.println(data);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+            completeList.add(new Player(name, level));
+        });
+        return completeList;
     }
 }
 

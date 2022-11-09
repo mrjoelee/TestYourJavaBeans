@@ -15,7 +15,7 @@ public class TriviaApp {
 
     public void execute() {
         introSequenceShow();
-        String name = promptName();
+        promptName();
         startRoundOfQuestions();
     }
 
@@ -25,11 +25,33 @@ public class TriviaApp {
         intro.next();
     }
 
+    private void directions() {
+        String message = String.format("Directions: If you get 5 correct answers, you will level up! Get 3 wrong and you are out!\n");
+        for (char c : message.toCharArray()) {
+            System.out.print(c);
+            Console.pause(100);
+        }
+    }
+
+    //prompting for name for new player
+    private String promptName() {
+        intro.showBanner();
+        directions();
+        String namePattern = "([a-zA-Z ]{2,20})";
+        String name = prompter.prompt("Please enter your first and last name:", namePattern,
+                "Invalid Data: Must be between 2-20 Characters (insensitive)\n");
+        System.out.println();
+        player = new Player(name, Difficulty.BEGINNER);
+        manager.playerExist(player);
+
+        return name;
+    }
+
     //we will have to refactor this session.
     public void startRoundOfQuestions() {
         switch (player.getLevel()) {
             case BEGINNER:
-                System.out.println("You are at beginnner level.");
+                System.out.println("You are at beginner level.");
                 while (getContinueGame() && (player.getCorrectAnswerCount() < 5)) {
                     answer();
                 }
@@ -61,28 +83,19 @@ public class TriviaApp {
         }
     }
 
-    //prompting for name for new player
-    private String promptName() {
-        intro.showBanner();
-        directions();
-        String namePattern = "([a-zA-Z ]{2,20})";
-        String name = prompter.prompt("Please enter your first and last name:", namePattern,
-                "Invalid Data: Must be between 2-20 Characters (insensitive)\n");
-        System.out.println();
-        player = new Player(name, Difficulty.BEGINNER);
-        manager.playerExist(player);
+   private String promptForAnswer() {
+       String answer = prompter.prompt("Please enter your answer:");
+       return answer;
+   }
 
-        return name;
-    }
-
-   /* method() used by startRoundOfQuestions - this shows the current question, prompts for a response
-    * then determines if correct. Sets field which determines whether or not to continue (continuesGame),
-    * also gets and sets number of correct and incorrect answers from player class
-    */
+    /* method() used by startRoundOfQuestions - this shows the current question, prompts for a response
+     * then determines if correct. Sets field which determines whether or not to continue (continuesGame),
+     * also gets and sets number of correct and incorrect answers from player class
+     */
     private void answer() {
         int answerCorrectCount = player.getCorrectAnswerCount();
         int answerIncorrectCount = player.getIncorrectAnswerCount();
-        Questions question = (player.getLevel()).nextQuestion();
+        Question question = (player.getLevel()).nextQuestion();
         System.out.println(question);
         String answer = promptForAnswer();
         if (question.isCorrectAnswer(answer)) {
@@ -102,19 +115,6 @@ public class TriviaApp {
         Console.pause(1000);
         Console.clear();
         intro.showBanner();
-    }
-
-    private void directions() {
-        String message = String.format("Directions: If you get 5 correct answers, you will level up! Get 3 wrong and you are out!\n");
-        for (char c : message.toCharArray()) {
-            System.out.print(c);
-            Console.pause(100);
-        }
-    }
-
-    private String promptForAnswer() {
-        String answer = prompter.prompt("Please enter your answer:");
-        return answer;
     }
 
     public boolean getContinueGame() {
