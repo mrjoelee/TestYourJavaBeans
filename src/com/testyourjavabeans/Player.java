@@ -2,7 +2,7 @@ package com.testyourjavabeans;
 
 import java.io.*;
 
-public class Player implements Serializable {
+public class Player implements Serializable { //need to implement serializable?
 
     private String name;
     private Difficulty level;

@@ -17,11 +17,9 @@ public class PlayerManager {
     private final Path playerDataFilePath;
     private File file = new File("player/playerdata.csv");
     private String name;
-    private Difficulty level;
+    private Difficulty level = Difficulty.BEGINNER;
     private boolean returningPlayer;
-
-
-    Map<String, Difficulty> playerMap = new TreeMap<>();
+    //Map<String, Difficulty> playerMap = new TreeMap<>();
     Player player;
 
     public PlayerManager(String playerDataFilePath) {
@@ -51,17 +49,17 @@ public class PlayerManager {
         return returningPlayer;
     }
 
-    public void playerLevelUpdate(Difficulty level) {
-        List<String> tempList = null;
-        String namePlayer = name;
-        String data = (name + "," + level);
+    public void playerLevelUpdate(Difficulty level, Player newPlayer) {
+//        List<String> tempList = null;
+//        String namePlayer = name;
+        String data = (newPlayer.getName() + "," + level);
 
         try {
-            List<String> lines = Files.readAllLines(playerDataFilePath);
-            FileWriter fileWriter = new FileWriter(String.valueOf(playerDataFilePath), false);
+            List<String> lines = Files.readAllLines(Path.of("player/playerdata.csv"));
+            FileWriter fileWriter = new FileWriter(playerDataFilePath.toFile(), false);
             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
             for (String line : lines) {
-                if (line.equals(name + "," + level)) {
+                if (line.equals(newPlayer.getName() + "," + newPlayer.getLevel().toString())) {
                     bufferedWriter.write(data);
                     bufferedWriter.newLine();
                 }
@@ -84,6 +82,7 @@ public class PlayerManager {
     public void playerExist(Player player) {
 //        setReturningPlayer(false);
         String tempLine = null;
+        Map<String, Difficulty> playerMap = new TreeMap<>();
         //create file if doesn't exit
         try {
             if (!file.exists()) {
@@ -93,21 +92,23 @@ public class PlayerManager {
             List<String> lines = Files.readAllLines(Path.of("player/playerdata.csv"));
             if (lines.isEmpty()) {
                 System.out.println("Welcome new player!");
-                addPlayerToFile(name, level);
-                lines.add(name + "," + level);
+                addPlayerToFile(player.getName(), player.getLevel());
+                lines.add(name + "," + level.toString());
             } else {
                 for (String line : lines) {
                     String playerName = line.split(",")[0];
-                    Difficulty playerLevel = level.valueOf(line.split(",")[1]);
-                    playerMap.put(playerName, playerLevel);
+                    System.out.println(playerName);
+                    System.out.println(line);
+                    Difficulty newLevel = Difficulty.valueOf(line.split(",")[1]);
+                    playerMap.put(playerName, newLevel);
                 }
-                if (playerMap.containsKey(name)) {
-                    System.out.println("Welcome back player: " + name + " your level is: " + playerMap.get(name));
-                    player.setLevel(playerMap.get(level));
+                if (playerMap.containsKey(player.getName())) {
+                    System.out.println("Welcome back player: " + player.getName() + " your level is: " + playerMap.get(player.getName()));
+                    player.setLevel(playerMap.get(player.getName()));
                 } else {
                     System.out.println("Welcome new player");
-                    addPlayerToFile(name, level);
-                    tempLine = (name + "," + level);
+                    addPlayerToFile(player.getName(), player.getLevel());
+                    tempLine = (player.getName() + "," + player.getLevel());
                 }
 
             }
