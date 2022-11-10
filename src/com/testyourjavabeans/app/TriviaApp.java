@@ -39,7 +39,7 @@ public class TriviaApp {
         directions();
         String namePattern = "([a-zA-Z ]{2,20})";
         String name = prompter.prompt("Please enter your first and last name:", namePattern,
-                "Invalid Data: Must be between 2-20 Characters (insensitive)\n");
+                "Invalid Data: Must be between 2-20 Characters (insensitive)\n").toLowerCase();
         System.out.println();
         player = new Player(name, Difficulty.BEGINNER);
         manager.playerExist(player);
