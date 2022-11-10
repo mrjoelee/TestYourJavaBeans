@@ -4,8 +4,9 @@
 * Joe
 
 # Project: TestYourJava
-* A Trivia based on Java Knowledge 
+* Java Trivia App (Console-Application)
 
 # Game Rules
 * Player has to answer 5 total questions to advance to the next level (beginner, intermediate, advanced).
-* If a player gets 3 wrong questions, Trivia ends. 
+* 3 wrong questions, Trivia ends. 
+* Player can return and start where they left off. 
