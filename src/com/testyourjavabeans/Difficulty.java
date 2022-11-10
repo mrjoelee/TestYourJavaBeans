@@ -13,7 +13,7 @@ public enum Difficulty {
     ADVANCED("hard");
 
     private final List<Question> questions = new ArrayList<>();
-    String filename;
+    private String filename;
 
     Difficulty(String filename) {
         this.filename = filename;

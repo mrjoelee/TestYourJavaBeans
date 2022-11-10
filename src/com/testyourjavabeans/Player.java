@@ -16,13 +16,20 @@ public class Player {
 
     public boolean shouldPlayerContinue() {
         boolean result = true;
-        if (getIncorrectAnswerCount() == 3) {
+        if(getIncorrectAnswerCount() == 2){
+            System.out.println("Warning: Last Chance!!");
+            pause();
+        } else if(getIncorrectAnswerCount() == 3){
             result = false;
             System.out.println("Oh no! You have made three incorrect guesses. " +
                     "Perhaps pause for a quick review and try again later!");
-            Console.pause(2000);
+            pause();
         }
         return result;
+    }
+
+    private void pause() {
+        Console.pause(2000);
     }
 
     public String getName() {

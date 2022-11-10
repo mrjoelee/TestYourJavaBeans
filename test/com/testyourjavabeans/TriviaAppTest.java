@@ -11,12 +11,12 @@ public class TriviaAppTest {
         List<Player> players = playerList.upload();
 
         Player player1 = players.get(0);
-        assertEquals(player1.getName(),"doug");
+        assertEquals(player1.getName(),"test1");
         assertEquals(player1.getLevel(), Difficulty.BEGINNER);
 
 
         Player player2 = players.get(1);
-        assertEquals(player2.getName(), "jeff");
-        assertEquals(player2.getLevel(), Difficulty.ADVANCED);
+        assertEquals(player2.getName(), "test2");
+        assertEquals(player2.getLevel(), Difficulty.BEGINNER);
     }
 }
