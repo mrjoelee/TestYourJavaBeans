@@ -47,7 +47,7 @@ public class TriviaApp {
         return name;
     }
 
-    //we will have to refactor this session.
+    //populates the questions accordingly to the player's level (beginner, intermediate, advanced)
     public void startRoundOfQuestions() {
         switch (player.getLevel()) {
 
