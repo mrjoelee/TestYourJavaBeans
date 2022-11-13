@@ -10,14 +10,21 @@ public class TriviaApp {
     Prompter prompter = new Prompter(new Scanner(System.in));
     private boolean continueGame = true;
     Intro intro = new Intro();
+    Music music = new Music();
     Player player;
     PlayerManager manager = new PlayerManager("player/playerdata.csv");
 
     public void execute() {
+        musicPlay1();
         introSequenceShow();
         promptName();
         startRoundOfQuestions();
     }
+
+    private void musicPlay1() {
+        music.musicPlay();
+    }
+
 
     //shows the intro of our team name and name of game.
     private void introSequenceShow() {
