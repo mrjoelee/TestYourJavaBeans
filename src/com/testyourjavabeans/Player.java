@@ -16,7 +16,13 @@ public class Player {
 
     public boolean shouldPlayerContinue() {
         boolean result = true;
-        if (getIncorrectAnswerCount() == 3) {
+        if (getIncorrectAnswerCount() == 1) {
+            System.out.println("2 Chances Left");
+        }
+        if (getIncorrectAnswerCount() == 2){
+            System.out.println("1 Chance Left");
+        }
+        if(getIncorrectAnswerCount() == 3){
             result = false;
             System.out.println("Oh no! You have made three incorrect guesses. " +
                     "Perhaps pause for a quick review and try again later!");
