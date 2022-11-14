@@ -15,13 +15,13 @@ public class TriviaApp {
     PlayerManager manager = new PlayerManager("player/playerdata.csv");
 
     public void execute() {
-        musicPlay1();
+        musicPlay();
         introSequenceShow();
         promptName();
         startRoundOfQuestions();
     }
 
-    private void musicPlay1() {
+    private void musicPlay() {
         music.musicPlay();
     }
 

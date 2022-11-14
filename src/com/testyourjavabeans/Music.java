@@ -2,7 +2,7 @@ package com.testyourjavabeans;
 
 import javax.sound.sampled.*;
 import java.io.File;
-import java.io.IOException;
+
 
 public class Music {
     String filePath = "music/jazzmusic.wav";
