@@ -60,6 +60,7 @@ public class TriviaApp {
 
             case BEGINNER:
                 System.out.println("You are at beginner level.");
+                System.out.println();
                 while (getContinueGame() && (player.getCorrectAnswerCount() < 5)) {
                     answer();
                 }
@@ -70,6 +71,7 @@ public class TriviaApp {
                     manager.playerLevelUpdate(Difficulty.INTERMEDIATE, player);
                     player.setLevel(Difficulty.INTERMEDIATE);
                     System.out.println(player.getName() + " you are now at level: " + player.getLevel() + "\n");
+                    System.out.println();
                     while (getContinueGame() && player.getCorrectAnswerCount() < 5) {
                         answer();
                     }
@@ -81,6 +83,7 @@ public class TriviaApp {
                     manager.playerLevelUpdate(Difficulty.ADVANCED, player);
                     player.setLevel(Difficulty.ADVANCED);
                     System.out.println(player.getName() + " you are now at level: " + player.getLevel() + "\n");
+                    System.out.println();
                     while (getContinueGame() && player.getCorrectAnswerCount() < 5) {
                         answer();
                     }
